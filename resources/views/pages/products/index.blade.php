@@ -69,6 +69,7 @@
                                             <th>Category</th>
                                             <th>Stock</th>
                                             <th>Price</th>
+                                            <th>Photo</th>
                                             <th>Action</th>
                                         </tr>
                                         @foreach ($products as $product)
@@ -86,6 +87,14 @@
                                                     {{ $product->price }}
                                                 </td>
                                                 <td>
+                                                    @if ($product->image)
+                                                        <img src="{{ asset('storage/products/'.$product->image) }}" alt=""
+                                                            width="75px" class="image-thumbnail">
+                                                        @else
+                                                            <span class="badge badge-danger">No Image</span>
+                                                    @endif
+                                                </td>
+                                                <td>
                                                     <div class="d-flex justify-content-center">
                                                         <a href='{{ route('product.edit', $product->id) }}'
                                                         class="btn btn-sm btn-info btn-icon">
@@ -99,7 +108,7 @@
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}" />
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> 
+                                                                <i class="fas fa-times"></i>
                                                                 Delete
                                                             </button>
                                                         </form>
